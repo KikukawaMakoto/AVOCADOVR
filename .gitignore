@@ -1,5 +1,4 @@
-/yamainu/.vs
-/yamainu/*.csproj
-/yamainu/Library
-/SceneTransitionTest/Library
-yamainu/Temp/
+/.vs
+/*.csproj
+/Library
+/Temp/
