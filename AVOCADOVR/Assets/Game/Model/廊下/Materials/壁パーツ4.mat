@@ -143,6 +143,7 @@ Material:
     - _BumpScale: 0.92
     - _CustomShadow2nd: 0
     - _Cutoff: 0.5
+    - _CutoutCutoutAdjust: 0.5
     - _DetailNormalMapScale: 1
     - _DoubleSidedBackfaceLightIntensity: 0.5
     - _DoubleSidedFlipBackfaceNormal: 0
@@ -159,7 +160,7 @@ Material:
     - _MatcapBlendMode: 3
     - _MatcapNormalMix: 1
     - _MatcapShadeMix: 0
-    - _Metallic: 1
+    - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OtherShadowAdjust: -0.1
