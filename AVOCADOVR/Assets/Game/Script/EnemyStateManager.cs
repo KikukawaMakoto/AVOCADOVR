@@ -24,7 +24,7 @@ public class EnemyStateManager : MonoBehaviour {
     [Header("現在のターゲットのプレイヤー")]
     [SerializeField] Transform m_Player;
     //止まる距離
-    private float m_Dis = 1.0f;
+    private float m_Dis = 2.5f;
     //自分のAnimator格納用
     private Animator m_MyAnim;
 	void Update () {
