@@ -34,6 +34,11 @@ public class EnemyStateManager2 : MonoBehaviour {
     //自分のAnimator格納用
     private Animator m_MyAnim;
     void Update() {
+        //自分のAnimatorが無い時
+        if (!m_MyAnim) {
+            //自分のアニメータを差し込む
+            m_MyAnim = GetComponent<Animator>();
+        }
         //もし、プレイヤーを見つけている時
         if (m_PlayerLookFlag) {
             //自身と取得したオブジェクトの距離を取得
@@ -43,16 +48,23 @@ public class EnemyStateManager2 : MonoBehaviour {
                 //もし、プレイヤーが離れすぎていた時
                 if (tmpDis > m_MoveStopDis) {
                     //NaviMeshを利用し、プレイヤーの位置へ向き
-                    gameObject.AddComponent<NavMeshAgent>().destination = m_Player.position;
-                    GetComponent<NavMeshAgent>().speed = 0.0f;
-                    //走るAnimationを再生させ移動させる。※未作成
-
-                //離れすぎてない時は目視を続ける
+                    /*gameObject.AddComponent<NavMeshAgent>();
+                    GetComponent<NavMeshAgent>().SetDestination(m_Player.position);
+                    GetComponent<NavMeshAgent>().speed = 0.0f;*/
+                    //走るAnimationを再生させ移動させる。
+                    //プレイヤーの方へ向け、
+                    transform.LookAt(m_Player.transform);
+                    m_MyAnim.SetBool("Move", true);
+                    m_MyAnim.SetBool("LookIdle", false);
+                    m_MyAnim.SetBool("AttackMove", false);
+                    //離れすぎてない時は目視を続ける
                 } else {
                     //対象の位置の方向を向く
                     transform.LookAt(m_Player.transform);
                     //特殊待機Animationを実行※未作成
-
+                    m_MyAnim.SetBool("Move", false);
+                    m_MyAnim.SetBool("LookIdle", true);
+                    m_MyAnim.SetBool("AttackMove", false);
                     //見続ける時間は減っていく…
                     m_PlayerLookTime -= Time.deltaTime;
                     //もし、プレイヤーが近づきすぎた時
@@ -65,13 +77,17 @@ public class EnemyStateManager2 : MonoBehaviour {
                 }
             //もし、プレイヤーが近づきすぎるか、一定時間たった時、
             } else {
-                //プレイヤーめがけて突進する(ここに突進Animation)。※未作成
-
+                //プレイヤーめがけて突進する(ここに突進Animation)。
+                m_MyAnim.SetBool("Move", false);
+                m_MyAnim.SetBool("LookIdle", false);
+                m_MyAnim.SetBool("AttackMove", true);
             }
         //プレイヤーを見つけていない時
         } else {
-            //Animationを待機状態に※未作成
-
+            //Animationを待機状態に
+            m_MyAnim.SetBool("Move", false);
+            m_MyAnim.SetBool("LookIdle", false);
+            m_MyAnim.SetBool("AttackMove", false);
             //辺りを見回す種類を変更するタイミング時間を減らしていく
             m_LookTime -= Time.deltaTime;
             //辺りを見回す種類を変更するタイミングが来たら
@@ -117,9 +133,9 @@ public class EnemyStateManager2 : MonoBehaviour {
         m_Player = obj;
     }
     //突進後、壁かプレイヤーに当たれば爆死(プレイヤーにはダメージ)。
-    void OnTriggerEnter(Collider other) {
+    void OnCollisionEnter (Collision other) {
         //突進中に
-        if (m_PlayerLookTime < 0.0f) {
+        if (m_PlayerLookTime <= 0.0f) {
             //壁か、プレイヤーに当たった時は
             if (other.gameObject.layer == LayerMask.NameToLayer("Kabe")|| other.gameObject.layer == LayerMask.NameToLayer("Player")) {
                 //パーティクルがあれば出す
@@ -131,8 +147,8 @@ public class EnemyStateManager2 : MonoBehaviour {
                     //対象のHPを減らす。
 
                 }*/
-                //この敵は即時に殺す。
-                DestroyImmediate(gameObject);
+                //この敵は殺す。
+                Destroy(gameObject);
             }
         }
     }
