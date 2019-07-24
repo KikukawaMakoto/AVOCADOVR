@@ -63,5 +63,12 @@ namespace MKTVRManager {
             //footpos.rotation = footdistancepos.rotation;
             footpos.rotation = Quaternion.Slerp(footpos.rotation, footdistancepos.rotation, m_Speed * Time.deltaTime);
         }
+        //両足の即自同期用関数
+        public void FootPosSet() {
+            m_FootL.position = m_FootLDestination.position;
+            m_FootL.rotation = m_FootLDestination.rotation;
+            m_FootR.position = m_FootRDestination.position;
+            m_FootR.rotation = m_FootRDestination.rotation;
+        }
     }
 }

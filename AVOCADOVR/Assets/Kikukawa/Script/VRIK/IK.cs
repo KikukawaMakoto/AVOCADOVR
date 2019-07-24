@@ -32,12 +32,12 @@ namespace MKTVRManager {
             avatar = GetComponent<Animator>();
         }
 
-        void OnGUI() {
+        /*void OnGUI() {
 
             GUILayout.Label("Activate IK and move the Effectors around in Scene View");
             ikActive = GUILayout.Toggle(ikActive, "Activate IK");
         }
-
+        */
 
         void OnAnimatorIK(int layerIndex) {
             if (avatar) {

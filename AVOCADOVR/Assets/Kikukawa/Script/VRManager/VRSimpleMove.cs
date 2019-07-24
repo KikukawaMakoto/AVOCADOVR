@@ -47,6 +47,10 @@ namespace MKTVRManager {
                 //出来上がったプレイヤーを中心として回転した情報を本体に渡す。
                 transform.position = m_RoomScaleInfo.position;
                 transform.rotation = m_RoomScaleInfo.rotation;
+                //もし、VRIKManagerがこのオブジェクト内に存在した時
+                if (GetComponent<VRIKManager>()) {
+                    GetComponent<VRIKManager>().FootPosSet();
+                }
             }
             //右移動
             if (Input.GetKeyDown(KeyCode.E) || m_KSteamVRManager.GetVRButtonDown(m_RotHandName, "TouchPad") && m_KSteamVRManager.GetTouchPadPos(m_RotHandName).x > 0 && m_KSteamVRManager.GetTouchPadPos(m_RotHandName).y < 0.7f && m_KSteamVRManager.GetTouchPadPos(m_RotHandName).y > -0.7f) {
@@ -60,12 +64,20 @@ namespace MKTVRManager {
                 //出来上がったプレイヤーを中心として回転した情報を本体に渡す。
                 transform.position = m_RoomScaleInfo.position;
                 transform.rotation = m_RoomScaleInfo.rotation;
+                //もし、VRIKManagerがこのオブジェクト内に存在した時
+                if (GetComponent<VRIKManager>()) {
+                    GetComponent<VRIKManager>().FootPosSet();
+                }
             }
             //ジャンプ
             if (Input.GetKeyDown(KeyCode.Space) || m_KSteamVRManager.GetVRButtonDown(m_MoveHandName, "TouchPad") && m_KSteamVRManager.GetTouchPadPos(m_MoveHandName).y > 0 && m_KSteamVRManager.GetTouchPadPos(m_MoveHandName).x < 0.7f && m_KSteamVRManager.GetTouchPadPos(m_MoveHandName).x > -0.7f) {
                 if (GetComponent<Rigidbody>() && !m_JumpFlag) {
                     GetComponent<Rigidbody>().AddForce(0.0f,200.0f,0.0f);
                     m_JumpFlag = true;
+                }
+                //もし、VRIKManagerがこのオブジェクト内に存在した時
+                if (GetComponent<VRIKManager>()) {
+                    GetComponent<VRIKManager>().FootPosSet();
                 }
             }
 
@@ -87,6 +99,10 @@ namespace MKTVRManager {
                 if (m_AvatorAnim) {
                     m_AvatorAnim.SetBool("Walk",true);
                 }
+                //もし、VRIKManagerがこのオブジェクト内に存在した時
+                if (GetComponent<VRIKManager>()) {
+                    GetComponent<VRIKManager>().FootPosSet();
+                }
             }
             //後ろ移動
             if (Input.GetKey(KeyCode.S) || m_KSteamVRManager.GetVRButton(m_MoveHandName, "TouchPad") && m_KSteamVRManager.GetTouchPadPos(m_MoveHandName).y < 0 && m_KSteamVRManager.GetTouchPadPos(m_MoveHandName).x < 0.7f && m_KSteamVRManager.GetTouchPadPos(m_MoveHandName).x > -0.7f) {
@@ -94,6 +110,10 @@ namespace MKTVRManager {
                 transform.position -= trans.transform.forward * m_MoveSpeed;
                 if (m_AvatorAnim) {
                     m_AvatorAnim.SetBool("Back", true);
+                }
+                //もし、VRIKManagerがこのオブジェクト内に存在した時
+                if (GetComponent<VRIKManager>()) {
+                    GetComponent<VRIKManager>().FootPosSet();
                 }
             }
             //左移動
@@ -103,6 +123,10 @@ namespace MKTVRManager {
                 if (m_AvatorAnim) {
                     m_AvatorAnim.SetBool("WalkL",true);
                 }
+                //もし、VRIKManagerがこのオブジェクト内に存在した時
+                if (GetComponent<VRIKManager>()) {
+                    GetComponent<VRIKManager>().FootPosSet();
+                }
             }
             //右移動
             if (Input.GetKey(KeyCode.D) || m_KSteamVRManager.GetVRButton(m_MoveHandName, "TouchPad") && m_KSteamVRManager.GetTouchPadPos(m_MoveHandName).x > 0 && m_KSteamVRManager.GetTouchPadPos(m_MoveHandName).y < 0.7f && m_KSteamVRManager.GetTouchPadPos(m_MoveHandName).y > -0.7f) {
@@ -110,6 +134,10 @@ namespace MKTVRManager {
                 transform.position += trans.transform.right * m_MoveSpeed;
                 if (m_AvatorAnim) {
                     m_AvatorAnim.SetBool("WalkR",true);
+                }
+                //もし、VRIKManagerがこのオブジェクト内に存在した時
+                if (GetComponent<VRIKManager>()) {
+                    GetComponent<VRIKManager>().FootPosSet();
                 }
             }
         }
