@@ -224,7 +224,7 @@ Material:
     - _VertexColorBlendEmissive: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.5211044, g: 0.66786003, b: 0.8250979, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionParallaxColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
