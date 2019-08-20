@@ -143,10 +143,10 @@ public class EnemyStateManager2 : MonoBehaviour {
                     GameObject Effect = (GameObject)Instantiate(m_BomEffect,transform.position, transform.rotation);
                 }
                 //対象にパラメータScriptがあれば、※未作成
-                /*if () {
+                if (other.gameObject.GetComponent<Parameta>()) {
                     //対象のHPを減らす。
-
-                }*/
+                    other.gameObject.GetComponent<Parameta>().HPAccess(m_ATK,true);
+                }
                 //この敵は殺す。
                 Destroy(gameObject);
             }
