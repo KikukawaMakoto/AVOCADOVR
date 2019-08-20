@@ -17,8 +17,6 @@ public class EnemyStateManager2 : MonoBehaviour {
     [Header("プレイヤーを見続ける時間")]
     [SerializeField] float m_PlayerLookTime = 3.5f;
 
-    [Header("プレイヤーに与えるダメージ量")]
-    [SerializeField] float m_ATK = 10.0f;
     [Header("現在のターゲットのプレイヤー")]
     [SerializeField] Transform m_Player;
     [Header("爆死パーティクル※あれば入れる")]
@@ -143,12 +141,12 @@ public class EnemyStateManager2 : MonoBehaviour {
                     GameObject Effect = (GameObject)Instantiate(m_BomEffect,transform.position, transform.rotation);
                 }
                 //対象にパラメータScriptがあれば、※未作成
-                if (other.gameObject.GetComponent<Parameta>()) {
+                if (other.gameObject.GetComponent<Parameta>() && GetComponent<Parameta>()) {
                     //対象のHPを減らす。
-                    other.gameObject.GetComponent<Parameta>().HPAccess(m_ATK,true);
+                    other.gameObject.GetComponent<Parameta>().HPAccess(GetComponent<Parameta>().GetATK(), true);
                 }
-                //この敵は殺す。
-                Destroy(gameObject);
+                //自分へは、致死量ダメージを与える。
+                GetComponent<Parameta>().HPAccess(9999,true);
             }
         }
     }

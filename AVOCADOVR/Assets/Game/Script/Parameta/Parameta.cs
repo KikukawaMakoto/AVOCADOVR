@@ -33,16 +33,6 @@ public class Parameta : MonoBehaviour {
             //補正する。
             m_HP = m_MaxHP;
         }
-        //このゲームオブジェクトがプレイヤータグの時
-        if (gameObject.tag == "Player") {
-            //HPが0以下になった時、死亡フラグが立っていなければ
-            if (m_HP <= 0.0f && !m_DeadFlag) {
-                //死亡回数を増やす。
-                m_DeadCnt++;
-                //死亡フラグを立てる。
-                m_DeadFlag = true;
-            }
-        }
 
         //HPバーが存在する時。
         if (m_HPBar) {
@@ -65,7 +55,14 @@ public class Parameta : MonoBehaviour {
             }
             //最終的に割り出された値を引く。
             m_HP -= access;
-        //ダメージでない場合、
+            //HPが0以下になった時、死亡フラグが立っていなければ
+            if (m_HP <= 0.0f && !m_DeadFlag) {
+                //死亡回数を増やす。
+                m_DeadCnt++;
+                //死亡フラグを立てる。
+                m_DeadFlag = true;
+            }
+            //ダメージでない場合、
         } else {
             //値を足す。
             m_HP += access;
@@ -88,5 +85,13 @@ public class Parameta : MonoBehaviour {
         m_HP = m_HeelHP;
         //死亡フラグをオフにする。
         m_DeadFlag = false;
+    }
+    //死亡フラグ取得用
+    public bool GetDeadFlag() {
+        return m_DeadFlag;
+    }
+    //攻撃力取得用
+    public float GetATK() {
+        return m_ATK;
     }
 }
